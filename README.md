@@ -1,6 +1,6 @@
 # Sistema Multitarefas
 
-Este projeto é um sistema multitarefas desenvolvido com Python e JavaScript, capaz de executar e gerenciar várias tarefas ao mesmo tempo de forma eficiente. Ele foi criado com o objetivo de demonstrar como diferentes tecnologias podem trabalhar juntas para lidar com múltiplos processos simultâneos.
+Este projeto é um sistema multitarefas desenvolvido com Python e JavaScript, capaz de executar e gerenciar tarefas cotidianas. Ele foi criado com o objetivo de aperfeiçoar a lógica de programação.
 
 ## Funcionalidades
 
