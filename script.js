@@ -1,6 +1,4 @@
-
 const $ = id => document.getElementById(id);
-
 
 const nameInput = $('name');
 const startBtn = $('start');
@@ -13,9 +11,9 @@ const taskPanel = $('taskPanel');
 const taskSelect = $('task');
 const form = $('form');
 const output = $('output');
+const resetBtn = $('resetTask');
 
 let userName = '';
-
 
 const tasks = {
   1: {
@@ -49,10 +47,8 @@ const tasks = {
       ].join('\n');
     }
   },
-
 };
 
-// Funções utilitárias
 function clear(element) {
   element.innerHTML = '';
 }
@@ -68,13 +64,10 @@ function createElementWithText(tag, text) {
 }
 
 function showResult(text) {
-
   output.innerHTML = `<div class="output fade">${text.replace(/\n/g, '<br>')}</div>`;
-  const fadeEl = output.querySelector('.fade');
-  fadeEl.style.opacity = 0;
+  const fadeEl = output.querySelector('.output');
   setTimeout(() => fadeEl.style.opacity = 1, 50);
 }
-
 
 function renderTask(id) {
   clear(form);
@@ -82,7 +75,6 @@ function renderTask(id) {
   const task = tasks[id];
   if (!task) return;
 
-  
   if (task.repeat) {
     const container = document.createElement('div');
     container.className = 'field';
@@ -115,7 +107,6 @@ function renderTask(id) {
     });
   }
 
-  
   if (task.fields) {
     task.fields.forEach(f => {
       const fieldDiv = document.createElement('div');
@@ -130,7 +121,6 @@ function renderTask(id) {
     });
   }
 
- 
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.textContent = 'Executar';
@@ -138,13 +128,22 @@ function renderTask(id) {
   btn.addEventListener('click', () => {
     try {
       const data = {};
-      if (task.fields) task.fields.forEach(f => data[f.id] = getInputValue(f.id));
+      if (task.fields) {
+        task.fields.forEach(f => {
+          const val = getInputValue(f.id);
+          if (!val) return alert('Preencha todos os campos.');
+          data[f.id] = val;
+        });
+      }
 
       if (task.repeat) {
         const count = Number($('count').value) || 0;
+        if (!count) return alert('Digite a quantidade de itens.');
         data.items = [];
         for (let i = 1; i <= count; i++) {
-          data.items.push(getInputValue(`${task.repeat}-${i}`));
+          const val = getInputValue(`${task.repeat}-${i}`);
+          if (!val) return alert('Preencha todos os itens.');
+          data.items.push(val);
         }
       }
 
@@ -166,13 +165,18 @@ startBtn.addEventListener('click', () => {
   taskPanel.classList.remove('hidden');
 });
 
-
 yesBtn.addEventListener('click', () => {
   storyText.textContent = 'Nas férias de 2025 comecei este projeto para praticar minhas habilidades de lógica de programação.';
 });
 
 noBtn.addEventListener('click', () => {
   storyText.textContent = 'Tudo bem! Escolha uma função abaixo para começar.';
+});
+
+resetBtn.addEventListener('click', () => {
+  clear(form);
+  clear(output);
+  taskSelect.value = '';
 });
 
 
@@ -183,14 +187,4 @@ Object.entries(tasks).forEach(([key, value]) => {
   taskSelect.appendChild(option);
 });
 
-
 taskSelect.addEventListener('change', e => renderTask(e.target.value));
-
-
-const style = document.createElement('style');
-style.innerHTML = `
-  .fade { transition: opacity 0.5s ease-in-out; }
-  .execute-btn { margin-top: 10px; cursor: pointer; padding: 5px 10px; }
-  .field { margin-bottom: 8px; }
-`;
-document.head.appendChild(style);
