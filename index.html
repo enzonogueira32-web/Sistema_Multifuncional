@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projeto Multitarefa</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="container">
@@ -12,6 +12,7 @@
       <h1>Projeto Multitarefa</h1>
       <p>Escolha uma função e execute-a na web.</p>
     </header>
+
     <section class="card">
       <div class="field">
         <label for="name">Digite seu nome:</label>
@@ -20,6 +21,7 @@
       <div class="field row">
         <button id="start">Começar</button>
       </div>
+
       <div id="story" class="hidden">
         <p>Olá <span id="user"></span>, você quer saber a história do projeto?</p>
         <button id="yes">Sim</button>
@@ -27,6 +29,7 @@
         <p id="storyText"></p>
       </div>
     </section>
+
     <section id="taskPanel" class="card hidden">
       <div class="field">
         <label for="task">Escolha a função:</label>
@@ -34,8 +37,10 @@
       </div>
       <div id="form"></div>
       <div id="output"></div>
+      <button id="resetTask" class="execute-btn">Limpar Tarefa</button>
     </section>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
