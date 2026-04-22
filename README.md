@@ -1,5 +1,5 @@
 
-Nome do Projeto: Projeto Multitarefa
+Nome do Projeto: Projeto de Funções Variadas
 Objetivo
 
 O site permite que o usuário execute pequenas tarefas interativas direto no navegador, como ordenar listas, fazer cálculos ou organizar dados, sem precisar instalar nada. É uma espécie de mini plataforma de exercícios de lógica e matemática.
